@@ -1,0 +1,72 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: accounts
+  config:
+    import: configserver:http://localhost:8071/
+  datasource:
+    url: jdbc:mysql://192.168.145.108:3306/accountsdb
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  rabbitmq:
+    host: "192.168.145.108"
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      show-values: always
+  info:
+    env:
+      enabled: true
+  health:
+    env:
+      enabled: true
+
+eureka:
+  security:
+    user:
+      name: admin
+      password: password
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://${eureka.security.user.name}:${eureka.security.user.password}@localhost:8070/eureka/
+    # Client local cache update frequency
+    registry-fetch-interval-seconds: 30
+  instance:
+    preferIpAddress: true
+    # Interval between two heartbeats sent to the server
+    lease-renewal-interval-in-seconds: 30
+    # Expiration time before eviction if no more heartbeat
+    lease-expiration-duration-in-seconds: 90
+
+build:
+  version: "3.0"
+
+info:
+  app:
+    name: accounts
+    description: Microservices for Accounts
+    version: 0.0.1-SNAPSHOT
+  team: integration
+  contact:
+    email: support-accounts@yascode.com
+
