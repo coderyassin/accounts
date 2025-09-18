@@ -8,11 +8,9 @@ on:
 
 jobs:
   build:
-
+    uses: coderyassin/github-actions-templates/.github/workflows/build.yml@master
     env:
       IMAGE_BASE: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
-
-    uses: coderyassin/github-actions-templates/.github/workflows/build.yml@master
     with:
       service-name: accounts
       commit-tag: ${{ github.ref_name }}
