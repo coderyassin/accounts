@@ -1,4 +1,4 @@
-name: Build & Push Accounts
+name: Build & Push
 
 on:
   push:
