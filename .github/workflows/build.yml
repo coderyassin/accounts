@@ -15,4 +15,4 @@ jobs:
     with:
       service-name: accounts
       commit-tag: ${{ github.ref_name }}
-      image-base: ${{ DOCKER_USERNAME }}/${{ github.event.repository.name }}
+      image-base: ${{ secrets.DOCKER_PASSWORD }}/${{ github.event.repository.name }}
